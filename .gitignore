@@ -138,6 +138,8 @@ dmypy.json
 *.sublime-workspace
 
 .vscode/
+.DS_Store/
+.venv/
 *.code-workspace
 
 # Local History for Visual Studio Code
