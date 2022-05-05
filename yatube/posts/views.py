@@ -10,8 +10,6 @@ def index(request):
         'posts': posts,
     }
 
-    class Meta:
-        ordering = ['-order_date']
     return render(request, 'posts/index.html', context)
 
 
@@ -23,6 +21,4 @@ def group_posts(request, slug):
         'posts': posts,
     }
 
-    class Meta:
-        ordering = ['-order_date']
     return render(request, 'posts/group_list.html', context)
