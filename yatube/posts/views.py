@@ -5,20 +5,24 @@ LIMITATION = 10
 
 
 def index(request):
-    template = 'posts/index.html'
-    posts = Post.objects.order_by('-pub_date')[:LIMITATION]
+    posts = Post.objects.select_related('group', 'author')[:LIMITATION]
     context = {
         'posts': posts,
     }
-    return render(request, template, context)
+
+    class Meta:
+        ordering = ['-order_date']
+    return render(request, 'posts/index.html', context)
 
 
 def group_posts(request, slug):
-    template = 'posts/group_list.html'
     group = get_object_or_404(Group, slug=slug)
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:LIMITATION]
+    posts = group.posts.all()[:LIMITATION]
     context = {
         'group': group,
         'posts': posts,
     }
-    return render(request, template, context)
+
+    class Meta:
+        ordering = ['-order_date']
+    return render(request, 'posts/group_list.html', context)
