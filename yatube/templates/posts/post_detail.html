@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %} Пост {{ post.text|truncatechars:30 }} {% endblock %}
+
+{% block content_one %}
+
+Дата публикации: {{ post.pub_date|date:"d E Y" }}
+</li>
+{% if post.group %}
+
+Группа: {{post.group.description}}
+<a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+{% endif %}
+</li>
+<li>
+    Автор: {{ post.author.get_full_name }}
+</li>
+Всего постов автора: {{ post.author.posts.count }} <span></span>
+</li>
+<li>
+    <a href="{% url 'posts:profile' post.author.username %}">
+        все посты пользователя
+    </a>
+</li>
+</ul>
+<p>
+    {{ post.text }}
+    {% endblock %}
