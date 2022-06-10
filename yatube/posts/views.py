@@ -65,7 +65,7 @@ def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            breakpoint()
+            # доделать логику с пустой группой
             group = Group.objects.get(id=form.data['group'])
             post = Post(
                 group=group,
